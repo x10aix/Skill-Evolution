@@ -4,11 +4,18 @@ This document tracks the structured version history of the Skill-Engineer based 
 
 ---
 
-### [Latest] May 13, 2026
+### [Latest] May 21, 2026
+**Version 4.41 â€” â€žEcosystem & Fairness" Update**
+
+* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” Ecosystem Mapping is now optional and will not block imports from external systems like OpenClaw.
+* `tbd` - **feat**: **Fairness & Credits (Modus C)** â€” When auditing or editing external skills, the agent proactively offers to append an `## Origin / Credits` block to properly attribute the original authors of the forked code without enforcing it.
+
+---
+
+### May 13, 2026
 **Version 4.4 â€” â€žAgent Economy 2026" Update**
 
-* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” The Skill-Engineer now reads only the `ECOSYSTEM.md` map in Phase 0 (statefully tracking via `.skill-config.json`), preventing token bloat and context inflation. Ecosystem Mapping is now optional and will not block imports from external systems like OpenClaw.
-* `tbd` - **feat**: **Fairness & Credits (Modus C)** â€” When auditing or editing external skills, the agent proactively offers to append an `## Origin / Credits` block to properly attribute the original authors of the forked code without enforcing it.
+* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” The Skill-Engineer now reads only the `ECOSYSTEM.md` map in Phase 0 (statefully tracking via `.skill-config.json`), preventing token bloat and context inflation.
 * `tbd` - **feat**: **Skill-Mapper Extraction** â€” The recursive mapping logic (formerly Modus M) has been extracted into a separate `skill-mapper` agent for better separation of concerns.
 * `tbd` - **feat**: **Conflict-Router** â€” When overlapping skills are detected, the agent proactively suggests generating a "Router-Skill" rather than just issuing a warning.
 * `tbd` - **feat**: **Toxic Inputs & TSD** â€” Phase 3 (Test-Driven Skill Development) now explicitly requires the design of "Toxic Inputs" (e.g., excessively long strings, race conditions) for edge-case testing.

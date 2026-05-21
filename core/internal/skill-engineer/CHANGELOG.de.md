@@ -4,11 +4,18 @@ Dieses Dokument verfolgt den strukturierten Versionsverlauf des Skill-Engineers 
 
 ---
 
-### [Latest] May 13, 2026
+### [Latest] May 21, 2026
+**Version 4.41 â€” â€žEcosystem & Fairness" Update**
+
+* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” Ecosystem Mapping ist nun optional und blockiert externe Importe nicht mehr.
+* `tbd` - **feat**: **Fairness & Credits (Modus C)** â€” Bei der ÃœberprÃ¼fung oder Bearbeitung externer Skills bietet der Agent proaktiv an, einen `## Origin / Credits`-Block anzuhÃ¤ngen, um Originalautoren fair zu verlinken, ohne dies zwingend zu fordern.
+
+---
+
+### Mai 13, 2026
 **Version 4.4 â€” â€žAgent Economy 2026" Update**
 
-* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” Der Skill-Engineer liest in Phase 0 nun nicht mehr stur alle Dateien, sondern prÃ¼ft (stateful via `.skill-config.json`) die `ECOSYSTEM.md` Map. Das verhindert Token-Bloat und Context-Inflation (Pruning). Ecosystem Mapping ist nun optional und blockiert externe Importe nicht.
-* `tbd` - **feat**: **Fairness & Credits (Modus C)** â€” Bei der ÃœberprÃ¼fung oder Bearbeitung externer Skills bietet der Agent proaktiv an, einen `## Origin / Credits`-Block anzuhÃ¤ngen, um Originalautoren fair zu verlinken, ohne dies zwingend zu fordern.
+* `tbd` - **feat**: **Stateful Ecosystem Pruning** â€” Der Skill-Engineer liest in Phase 0 nun nicht mehr stur alle Dateien, sondern prÃ¼ft (stateful via `.skill-config.json`) die `ECOSYSTEM.md` Map. Das verhindert Token-Bloat und Context-Inflation (Pruning).
 * `tbd` - **feat**: **Skill-Mapper Auslagerung** â€” Die rekursive Mapping-Logik (ehemals Modus M) wurde aus Performance-GrÃ¼nden (Separation of Concerns) in einen separaten `skill-mapper` Agenten ausgelagert.
 * `tbd` - **feat**: **Conflict-Router** â€” Erkennt der Engineer einen Ãœberlappungs-Konflikt, schlÃ¤gt er proaktiv die Generierung eines "Router-Skills" vor, anstatt nur zu warnen.
 * `tbd` - **feat**: **Toxic Inputs & TSD** â€” In Phase 3 (TSD) wird nun explizit das Entwerfen von "Toxic Inputs" (z.B. Ã¼berlange Strings, Race Conditions) fÃ¼r Edge-Case-Tests gefordert.
