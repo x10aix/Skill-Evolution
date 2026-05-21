@@ -136,7 +136,9 @@ Bevor du das Interview startest, klassifiziere den Input:
 **C-Edit** (Nutzer will eine spezifische Änderung, sagt z.B. "füge Regel X hinzu", "ändere die Description", "ergänze ein Beispiel"):
 → Setze die Änderung direkt um. Prüfe NUR den geänderten Bereich gegen das Qualitätsgate. Kein Full-Audit, kein Bestätigungszyklus.
 
-**Schritte für C-Audit:**
+**Schritt C0: Origin & Credits Check.**
+Bevor du den Audit/Edit startest, weise den Nutzer kurz auf Fairness bei Fremd-Skills hin und frage, ob er einen Link oder Original-Autor für einen `## Origin / Credits`-Block angeben möchte. Dies ist **kein Zwang** – wenn er ablehnt oder keine Daten hat, fahre einfach ohne Block fort.
+
 **Schritt C1: Qualitätsgate als Prüfmaßstab anwenden.**
 Prüfe den bestehenden Skill gegen alle 8 Kriterien aus Phase 4. Dokumentiere das Ergebnis als Audit-Bericht in diesem Format:
 ```
