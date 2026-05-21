@@ -330,6 +330,12 @@ Frage nur bei Unsicherheit über den Zielpfad (z.B. globaler vs. workspace-spezi
 Bei Plattformen ohne Dateisystem-Zugriff (Gemini CLI, Chat-Interfaces):
 Output im Chat ausgeben.
 
+**Submodule-Awareness (Pflicht bei Git-Repositories):**
+Wenn du an einem Skill arbeitest, der in einem Git Submodule liegt (z.B. innerhalb von `skills/`):
+1. **Zwei-Phasen-Commit:** Du musst deine Änderungen (Erstellen/Editieren von Dateien) immer zuerst direkt im Submodule-Verzeichnis committen. Nutze `run_command`, um in das Verzeichnis zu wechseln (`cd skills`), dort zu committen (`git commit`) und ggf. zu pushen.
+2. **Pointer-Update:** Danach musst du zwingend zurück ins Haupt-Repository wechseln (`cd ..`) und dort den neuen Stand des Submodules committen (`git add skills; git commit -m "Update submodule pointer"`).
+3. Beachte dies bei jeder Datei-Operation, um Git-Konflikte und "Detached HEAD" Zustände zu vermeiden.
+
 ### PHASE 4: QUALITÄTSGATE (Pflicht, vor Übergabe)
 
 Prüfe deinen eigenen Output gegen diese Checkliste.
