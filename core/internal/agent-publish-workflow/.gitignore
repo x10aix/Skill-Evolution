@@ -1,7 +1,0 @@
-node_modules/
-dist/
-releases/
-reports/
-.env
-.cursor/
-*.zip
