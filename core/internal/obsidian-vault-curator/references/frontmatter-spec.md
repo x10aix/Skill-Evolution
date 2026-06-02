@@ -57,12 +57,17 @@ status: [active|archived|draft]                    # 🔲 Optional — Default: 
 
 ## Tag-Konventionen
 
+> ⚠️ **Pflicht:** Immer `C:\Users\drxle\Documents\x10aix\99_System\tag-catalog.json` lesen
+> und Tags gegen die `canonical_tags`-Aliases normalisieren bevor das Frontmatter geschrieben wird.
+> Nur kanonische Tags (Schlüssel in `canonical_tags`) sind erlaubt — keine Aliases direkt verwenden.
+
 - Immer **lowercase**
 - Keine Leerzeichen → Bindestriche: `ki-strategie` statt `KI Strategie`
-- 2 Pflicht-Tags: Herkunft + Thema (z.B. `[google-drive, ki-strategie]`)
+- 2 Pflicht-Tags: Herkunft + Thema (z.B. `[google-drive, ki]`)
 - Max. 5 Tags — Qualität vor Quantität
-- Bewährte Tags: `antigravity`, `github`, `google-drive`, `ai-chat`, `ki`, `marketing`,
-  `sales`, `strategie`, `methode`, `tool`, `code`, `inbox`, `automatisch`
+- Kanonische Tags (Auszug): `antigravity`, `github`, `google-drive`, `ai-chat`, `ki`,
+  `marketing`, `sales`, `strategie`, `methode`, `tool`, `code`, `automatisch`, `second-brain`
+- Vollständige Liste + Aliases: [tag-catalog.json](../../../../x10aix/99_System/tag-catalog.json)
 
 ## Dateinamens-Konventionen
 

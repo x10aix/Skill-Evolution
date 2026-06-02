@@ -55,13 +55,26 @@ das Wissen — du strukturierst und verortest es. Doppelte Ablage ist dein grö�
 
 ## <process_workflow>
 
-### Schritt 1: Input analysieren
+### Schritt 1: Input analysieren + Tags normalisieren
 Extrahiere aus dem Input:
 - **Titel** (explizit angegeben oder aus erstem Satz/Überschrift ableiten)
 - **Typ** (Welche Art von Wissen? Siehe [frontmatter-spec.md](references/frontmatter-spec.md) → Typ-Liste)
 - **Quelle** (Woher kommt der Inhalt? Manuell, AI-Chat, Recherche, Code, etc.)
 - **Tags** (2–5 relevante Schlagworte aus dem Inhalt)
 - **Datum** (heute, oder explizit angegeben)
+
+**Tag-Normalisierung (Pflicht):**
+Lese `C:\Users\drxle\Documents\x10aix\99_System\tag-catalog.json`.
+Jeden vorgeschlagenen Tag gegen die `canonical_tags`-Aliases prüfen:
+- Alias gefunden → kanonischen Tag verwenden (z.B. `künstliche-intelligenz` → `ki`)
+- Kein Eintrag gefunden → Nutzer fragen:
+  ```
+  ⚠️ Unbekannter Tag: "[tag]"
+  [1] Zu bestehendem Tag zuordnen: ______
+  [2] Als neuen kanonischen Tag hinzufügen
+  [3] Tag weglassen
+  ```
+  Neuer Tag wird nach Bestätigung in tag-catalog.json geschrieben.
 
 ### Schritt 2: PARA-Ordner bestimmen
 Konsultiere [para-routing.md](references/para-routing.md).
@@ -102,14 +115,43 @@ Validiere die fertige Note gegen diese Bedingungen — bei Verletzung verwerfen 
 - [ ] Dateiname enthält keine verbotenen Sonderzeichen (`< > : " / \ | ? *`)
 - [ ] Kein identisches Duplikat existiert
 
-### Schritt 7: Verwandte Notes ausgeben
-Nach dem Schreiben: Suche im Vault nach thematisch verwandten Notes und gib
-maximal 5 Wiki-Links aus:
+### Schritt 7: Verwandte Notes via vault-linker bestimmen
+Nach dem Schreiben: Delegiere an `obsidian-vault-linker` (Normal-Modus).
+
+Input an vault-linker:
 ```
-🔗 Verwandte Notes:
-- [[AG — Skill-Evolution]]
-- [[30_Resources/Knowledge/Methods/Prompt Engineering]]
+title: [Titel der neuen Note]
+type:  [Typ]
+tags:  [kanonische Tags aus Schritt 1]
 ```
+
+Output vom vault-linker: Liste von Wikilinks → in `related:`-Frontmatter-Feld schreiben.
+
+```yaml
+related: ["[[Note A]]", "[[Note B]]", "[[Note C]]"]
+```
+
+Wenn vault-index.json leer ist:
+```
+⚠️ vault-index.json ist leer. Full-Scan starten:
+pwsh -File "C:\Antigravity Projects\RAG-intern\vault\full-scan.ps1"
+```
+
+### Schritt 8: vault-index.json aktualisieren
+Nach erfolgreichem Write: Neuen Eintrag in `C:\Users\drxle\Documents\x10aix\99_System\vault-index.json` eintragen.
+
+```json
+{
+  "title": "[Titel]",
+  "file":  "[relativer Pfad ab Vault-Root, Slashes]",
+  "type":  "[Typ]",
+  "tags":  [["tag1", "tag2"]],
+  "date":  "[YYYY-MM-DD]"
+}
+```
+
+Den `note_count` um 1 erhöhen und `last_updated` auf heute setzen.
+**Kein Full-Read nötig** — nur den neuen Eintrag ans `notes`-Array anhängen und die Metadaten-Felder updaten.
 
 ## <output_standards>
 
