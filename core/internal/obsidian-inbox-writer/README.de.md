@@ -1,6 +1,6 @@
 # obsidian-inbox-writer: Architektur & Funktionsweise
 
-**Version:** 1.0 — Initial Release (2026-06-04)
+**Version:** 1.1 — Prozess-Konformität & Struktur-Repair (2026-06-04)
 
 🇬🇧 [Read in English](README.md)
 

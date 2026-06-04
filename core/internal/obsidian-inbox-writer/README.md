@@ -1,6 +1,6 @@
 # obsidian-inbox-writer: Architecture & How It Works
 
-**Version:** 1.0 — Initial Release (2026-06-04)
+**Version:** 1.1 — Process Compliance Repair (2026-06-04)
 
 🇩🇪 [Auf Deutsch lesen](README.de.md)
 

@@ -4,36 +4,53 @@ description: >
   Drops a correctly formatted Markdown note into the x10aix Obsidian Inbox.
   Use whenever the user says "save this", "note this", "ins Obsidian", "in den Vault",
   "als Notiz", "speicher das", "ins Second Brain", or when a conversation produces
-  something worth keeping. Always targets the Inbox only — PARA sorting and curation
-  happens separately via the obsidian-vault-curator skill (Antigravity). Works on all
-  platforms: Claude Code, ChatGPT Desktop, Antigravity.
+  something worth keeping. Also triggers when the user says "schreib das auf",
+  "merk dir das", "leg das ab". Always targets the Inbox only — PARA sorting and
+  curation happens separately via the obsidian-vault-curator skill (Antigravity only).
+  Works on all platforms: Claude Code, ChatGPT Desktop, Antigravity (direct write),
+  Claude.ai, ChatGPT Web (codeblock fallback).
 ---
 
 # Obsidian Inbox Writer
 
 Schreibt eine einheitlich formatierte Notiz direkt in den x10aix Vault-Inbox.
-**Kein PARA-Routing, kein Linken, kein Kuratieren** — das macht ein separater Prozess.
-Diese Skill-Instanz hat exakt eine Aufgabe: Inbox Drop mit validem Format.
+**Kein PARA-Routing, kein Linken, kein Kuratieren** — exakt eine Aufgabe: Inbox Drop mit validem Format.
 
-## Vault-Inbox-Pfad
+## Use this skill when
 
-```
-C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\
-```
+- Der Nutzer explizit etwas ablegen will: „speicher das", „ins Obsidian", „als Notiz", „merk dir das"
+- Ein Gespräch eine Erkenntnis, Entscheidung, Idee oder Ressource produziert hat, die persistent werden soll
+- Der Nutzer sagt „write this to my vault" oder ähnliches in EN/DE
 
-## Dateiname-Format (Pflicht, unveränderlich)
+## Do not use this skill when
 
-```
-YYYY-MM-DD — [Titel].md
-```
+- Der Nutzer nur eine Zusammenfassung im Chat möchte (kein Ablegen)
+- Es um PARA-Routing, Verlinkung oder Vault-Kuration geht → `obsidian-vault-curator`
+- Es um Lesen, Suchen oder Bearbeiten bestehender Vault-Notes geht
 
-Beispiel: `2026-06-04 — Entscheidung RAG-intern Ingestion.md`
+## Instructions
 
-Erlaubte Zeichen im Titel: Buchstaben, Zahlen, Leerzeichen, `-`, `_`, `(`, `)`.
-Verboten: `< > : " / \ | ? *`
-Maximale Länge: 80 Zeichen (ohne `.md`)
+### Schritt 1: Environment Check
 
-## Frontmatter-Template (Pflicht, unveränderlich)
+Prüfe, ob eine `.skill-config.json` im Skill-Verzeichnis existiert und `VAULT_INBOX_PATH` enthält.
+
+- **Datei existiert und Pfad gesetzt:** Verwende `VAULT_INBOX_PATH` als Zielordner.
+- **Datei fehlt oder Pfad leer:**
+  - WARNING ausgeben: `⚠️ Kein Vault-Pfad konfiguriert. Standardpfad wird verwendet: C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\`
+  - Mit dem Standardpfad fortfahren — kein Abbruch.
+  - Antigravity: `.skill-config.json` im Skill-Verzeichnis anlegen mit `VAULT_INBOX_PATH` und `STATUS: CONFIGURED`. Sicherstellen, dass `.skill-config.json` in der `.gitignore` steht.
+
+### Schritt 2: Dateiname konstruieren
+
+Format (unveränderlich): `YYYY-MM-DD — [Titel].md`
+
+- Datum: heutiges Datum
+- Titel: prägnant, aus dem Konversations-Inhalt extrahiert
+- Erlaubte Zeichen: Buchstaben, Zahlen, Leerzeichen, `-`, `_`, `(`, `)`
+- Verboten: `< > : " / \ | ? *`
+- Maximale Länge: 80 Zeichen (ohne `.md`)
+
+### Schritt 3: Frontmatter befüllen
 
 ```yaml
 ---
@@ -46,7 +63,7 @@ inbox: true
 ---
 ```
 
-### Pflichtfelder
+**Pflichtfelder:**
 
 | Feld | Wert |
 |:---|:---|
@@ -57,7 +74,7 @@ inbox: true
 | `date` | Heutiges Datum `YYYY-MM-DD` |
 | `inbox` | Immer `true` |
 
-### Typ-Liste
+**Typ-Liste:**
 
 | Typ | Wann |
 |:---|:---|
@@ -71,13 +88,9 @@ inbox: true
 | `project-note` | Projektbezogene Notiz |
 | `method` | Framework, Prozess, Methode |
 
-## Note-Struktur (Pflicht)
+### Schritt 4: Note-Body verfassen
 
 ```markdown
----
-[Frontmatter]
----
-
 # [Titel]
 
 [Kerninhalt — direkt und substanziell, keine Füllsätze]
@@ -92,31 +105,11 @@ inbox: true
 *[Plattform] | [Datum] | obsidian-inbox-writer*
 ```
 
-**Regeln:**
-- Leere Abschnitte (`## Kontext`, `## Nächste Schritte`) weglassen wenn nicht relevant
-- Bullet Points bevorzugen
-- Code in Fenced Blocks mit Sprach-Tag
+Leere Abschnitte weglassen. Bullet Points bevorzugen. Code in Fenced Blocks mit Sprach-Tag.
 
-## Ausführung nach Plattform
+### Schritt 5: Constraint-Check (vor Write / Output)
 
-**Claude Code / ChatGPT Desktop (mit Dateisystem-Zugriff):**
-Schreibe die Datei direkt nach:
-`C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\YYYY-MM-DD — [Titel].md`
-Bestätige mit: `✅ Gespeichert: [Dateiname]`
-
-**Claude.ai / ChatGPT Web (ohne Dateisystem-Zugriff):**
-Gib den kompletten Note-Inhalt als Markdown-Codeblock aus.
-ChatGPT kann zusätzlich eine herunterladbare `.md`-Datei erstellen.
-Weise den Nutzer an:
-```
-💾 Speichern als: YYYY-MM-DD — [Titel].md
-📁 Ablegen in:   C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\
-   oder:         Downloads-Ordner (Watcher verarbeitet automatisch)
-```
-
-## Constraint-Check (vor jedem Write / Output)
-
-Exakt diese 5 Punkte prüfen — bei Verletzung korrigieren, nicht fragen:
+Exakt diese 5 Punkte prüfen — bei Verletzung **still korrigieren, nicht fragen**:
 
 ```
 ☐ Frontmatter öffnet mit --- und schließt mit ---
@@ -126,12 +119,30 @@ Exakt diese 5 Punkte prüfen — bei Verletzung korrigieren, nicht fragen:
 ☐ Dateiname ≤ 80 Zeichen
 ```
 
-<!-- CONFIGURATION_START -->
-STATUS: CONFIGURED
-Zielplattform: Claude Code, Claude.ai, ChatGPT Desktop, ChatGPT Web, Antigravity
-Ziel-LLM: Model-Agnostic
-Ziel-Nutzer: Michael Drexler (x10aix)
-Vault-Inbox: C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\
-Sprache: Deutsch bevorzugt, gemischt DE/EN je nach Input
-Kuration / PARA-Routing: obsidian-vault-curator (separater Skill, nur Antigravity)
-<!-- CONFIGURATION_END -->
+### Schritt 6: Ausführen nach Plattform
+
+**Antigravity / Claude Code / ChatGPT Desktop (mit Dateisystem-Zugriff):**
+Schreibe die Datei direkt nach `{{VAULT_INBOX_PATH}}\YYYY-MM-DD — [Titel].md`
+Bestätige mit: `✅ Gespeichert: [Dateiname]`
+
+**Claude.ai / ChatGPT Web (ohne Dateisystem-Zugriff):**
+Gib den kompletten Note-Inhalt als Markdown-Codeblock aus.
+ChatGPT kann zusätzlich eine herunterladbare `.md`-Datei erstellen.
+Weise den Nutzer an:
+```
+💾 Speichern als: YYYY-MM-DD — [Titel].md
+📁 Ablegen in:   {{VAULT_INBOX_PATH}}
+   oder:         Downloads-Ordner (Watcher verarbeitet automatisch)
+```
+
+## NIEMALS
+
+- NIEMALS PARA-Routing-Entscheidungen treffen (Ordner außer Inbox)
+- NIEMALS bestehende Vault-Notes lesen, ändern oder löschen
+- NIEMALS den Nutzer mit Constraint-Verletzungen aufhalten — immer still korrigieren
+- NIEMALS `inbox: false` setzen
+- NIEMALS Konfiguration (`VAULT_INBOX_PATH` o.ä.) in die `SKILL.md` schreiben — ausschließlich in `.skill-config.json`
+
+## Output Format
+
+Vollständiges Beispiel: → [`examples/example-01-insight.md`](examples/example-01-insight.md)
