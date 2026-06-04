@@ -1,148 +1,113 @@
 ---
 name: obsidian-inbox-writer
 description: >
-  Drops a correctly formatted Markdown note into the x10aix Obsidian Inbox.
+  Drops a correctly formatted Markdown note into an Obsidian Vault Inbox.
   Use whenever the user says "save this", "note this", "ins Obsidian", "in den Vault",
   "als Notiz", "speicher das", "ins Second Brain", or when a conversation produces
-  something worth keeping. Also triggers when the user says "schreib das auf",
-  "merk dir das", "leg das ab". Always targets the Inbox only — PARA sorting and
-  curation happens separately via the obsidian-vault-curator skill (Antigravity only).
-  Works on all platforms: Claude Code, ChatGPT Desktop, Antigravity (direct write),
-  Claude.ai, ChatGPT Web (codeblock fallback).
+  something worth keeping (decision, insight, idea, research result).
+  Always targets the Inbox only — PARA sorting and curation happens separately.
+  Works on all platforms: Claude Code, ChatGPT Desktop, Antigravity.
+requires:
+  - obsidian-vault-curator  # WARNING if missing: curation step will not run automatically
 ---
 
 # Obsidian Inbox Writer
 
-Schreibt eine einheitlich formatierte Notiz direkt in den x10aix Vault-Inbox.
-**Kein PARA-Routing, kein Linken, kein Kuratieren** — exakt eine Aufgabe: Inbox Drop mit validem Format.
+Writes a consistently formatted note directly into the configured Obsidian Vault Inbox.
+**No PARA routing, no linking, no curation** — that is a separate process handled by `obsidian-vault-curator`.
+One job: valid Inbox Drop.
+
+## Setup (once per installation)
+
+Set your Vault Inbox path. Replace the placeholder in the instructions below:
+
+```
+VAULT_INBOX = <absolute path to your Obsidian Inbox folder>
+Example (Windows): C:\Users\<username>\Documents\<vault>\00_Inbox\Inbox_Antigravity\
+Example (macOS):   /Users/<username>/Documents/<vault>/00_Inbox/Inbox_Antigravity/
+```
+
+If `obsidian-vault-curator` is not installed, warn the user once per session:
+> ⚠️ obsidian-vault-curator not found. Notes will accumulate in Inbox without automatic curation.
 
 ## Use this skill when
 
-- Der Nutzer explizit etwas ablegen will: „speicher das", „ins Obsidian", „als Notiz", „merk dir das"
-- Ein Gespräch eine Erkenntnis, Entscheidung, Idee oder Ressource produziert hat, die persistent werden soll
-- Der Nutzer sagt „write this to my vault" oder ähnliches in EN/DE
+- User says: "save this", "note this", "ins Obsidian", "in den Vault", "als Notiz", "speicher das", "ins Second Brain"
+- A conversation produces a decision, insight, idea, research result, or resource worth keeping
+- User explicitly asks for an Obsidian note
 
 ## Do not use this skill when
 
-- Der Nutzer nur eine Zusammenfassung im Chat möchte (kein Ablegen)
-- Es um PARA-Routing, Verlinkung oder Vault-Kuration geht → `obsidian-vault-curator`
-- Es um Lesen, Suchen oder Bearbeiten bestehender Vault-Notes geht
+- User wants to search or read existing notes (use vault search instead)
+- User wants to move or reorganize notes (use obsidian-vault-curator)
+- The content is a temporary calculation or throwaway output
 
 ## Instructions
 
-### Schritt 1: Environment Check
+1. **Determine title** — derive a concise title from the content (max 60 chars). Ask user only if completely ambiguous.
 
-Prüfe, ob eine `.skill-config.json` im Skill-Verzeichnis existiert und `VAULT_INBOX_PATH` enthält.
+2. **Determine type** from this list (pick closest match):
 
-- **Datei existiert und Pfad gesetzt:** Verwende `VAULT_INBOX_PATH` als Zielordner.
-- **Datei fehlt oder Pfad leer:**
-  - WARNING ausgeben: `⚠️ Kein Vault-Pfad konfiguriert. Standardpfad wird verwendet: C:\Users\drxle\Documents\x10aix\00_Inbox\Inbox_Antigravity\`
-  - Mit dem Standardpfad fortfahren — kein Abbruch.
-  - Antigravity: `.skill-config.json` im Skill-Verzeichnis anlegen mit `VAULT_INBOX_PATH` und `STATUS: CONFIGURED`. Sicherstellen, dass `.skill-config.json` in der `.gitignore` steht.
+   | Type | When |
+   |:-----|:-----|
+   | `insight` | Conclusion, realization |
+   | `decision` | Decision made + reasoning |
+   | `idea` | Open idea, not yet developed |
+   | `ai-chat` | Highlight / summary from AI conversation |
+   | `meeting-note` | Meeting or conversation summary |
+   | `research` | Research result |
+   | `resource` | Tool, article, reference |
+   | `project-note` | Project-related note |
+   | `method` | Framework, process, method |
 
-### Schritt 2: Dateiname konstruieren
+3. **Determine tags** — 2–4 tags, lowercase, hyphens (e.g. `ki-strategie`, `antigravity`). Derive from content, do not ask.
 
-Format (unveränderlich): `YYYY-MM-DD — [Titel].md`
+4. **Determine source** — one of: `claude`, `chatgpt`, `gemini`, `antigravity`, `manual`, `meeting`, `web-research`.
 
-- Datum: heutiges Datum
-- Titel: prägnant, aus dem Konversations-Inhalt extrahiert
-- Erlaubte Zeichen: Buchstaben, Zahlen, Leerzeichen, `-`, `_`, `(`, `)`
-- Verboten: `< > : " / \ | ? *`
-- Maximale Länge: 80 Zeichen (ohne `.md`)
+5. **Run Constraint-Check before writing:**
+   ```
+   ☐ Filename: YYYY-MM-DD — [Title].md  (no special chars: < > : " / \ | ? *)
+   ☐ Filename ≤ 80 chars (without .md)
+   ☐ Frontmatter opens with --- and closes with ---
+   ☐ All fields filled: title, type, source, tags, date, inbox: true
+   ☐ Target path = VAULT_INBOX (from Setup)
+   ```
+   Fix any violation before writing. Do not ask — correct silently.
 
-### Schritt 3: Frontmatter befüllen
+6. **Write the file** to `VAULT_INBOX/YYYY-MM-DD — [Title].md`
 
-```yaml
----
-title: "[Titel identisch zum Dateinamen ohne Datum]"
-type: [typ]
-source: [plattform]
-tags: [tag1, tag2]
-date: YYYY-MM-DD
-inbox: true
----
-```
-
-**Pflichtfelder:**
-
-| Feld | Wert |
-|:---|:---|
-| `title` | Titel in Anführungszeichen |
-| `type` | Aus der Typ-Liste unten |
-| `source` | `claude`, `chatgpt`, `gemini`, `antigravity`, `manual`, `meeting`, `web-research` |
-| `tags` | 2–4 Tags, lowercase, Bindestriche (z.B. `ki-strategie`, `antigravity`) |
-| `date` | Heutiges Datum `YYYY-MM-DD` |
-| `inbox` | Immer `true` |
-
-**Typ-Liste:**
-
-| Typ | Wann |
-|:---|:---|
-| `insight` | Erkenntnis, Schlussfolgerung |
-| `decision` | Getroffene Entscheidung + Begründung |
-| `idea` | Offene Idee, noch nicht ausgearbeitet |
-| `ai-chat` | Highlight / Zusammenfassung aus AI-Gespräch |
-| `meeting-note` | Gesprächs- oder Meeting-Zusammenfassung |
-| `research` | Recherche-Ergebnis |
-| `resource` | Tool, Artikel, Referenz |
-| `project-note` | Projektbezogene Notiz |
-| `method` | Framework, Prozess, Methode |
-
-### Schritt 4: Note-Body verfassen
-
-```markdown
-# [Titel]
-
-[Kerninhalt — direkt und substanziell, keine Füllsätze]
-
-## Kontext
-[Optional: Warum relevant? Aus welchem Gespräch/Projekt?]
-
-## Nächste Schritte
-[Optional: Was soll damit passieren?]
-
----
-*[Plattform] | [Datum] | obsidian-inbox-writer*
-```
-
-Leere Abschnitte weglassen. Bullet Points bevorzugen. Code in Fenced Blocks mit Sprach-Tag.
-
-### Schritt 5: Constraint-Check (vor Write / Output)
-
-Exakt diese 5 Punkte prüfen — bei Verletzung **still korrigieren, nicht fragen**:
-
-```
-☐ Frontmatter öffnet mit --- und schließt mit ---
-☐ title, type, source, tags, date, inbox befüllt
-☐ inbox: true gesetzt
-☐ Dateiname: YYYY-MM-DD — [Titel].md, keine Sonderzeichen
-☐ Dateiname ≤ 80 Zeichen
-```
-
-### Schritt 6: Ausführen nach Plattform
-
-**Antigravity / Claude Code / ChatGPT Desktop (mit Dateisystem-Zugriff):**
-Schreibe die Datei direkt nach `{{VAULT_INBOX_PATH}}\YYYY-MM-DD — [Titel].md`
-Bestätige mit: `✅ Gespeichert: [Dateiname]`
-
-**Claude.ai / ChatGPT Web (ohne Dateisystem-Zugriff):**
-Gib den kompletten Note-Inhalt als Markdown-Codeblock aus.
-ChatGPT kann zusätzlich eine herunterladbare `.md`-Datei erstellen.
-Weise den Nutzer an:
-```
-💾 Speichern als: YYYY-MM-DD — [Titel].md
-📁 Ablegen in:   {{VAULT_INBOX_PATH}}
-   oder:         Downloads-Ordner (Watcher verarbeitet automatisch)
-```
-
-## NIEMALS
-
-- NIEMALS PARA-Routing-Entscheidungen treffen (Ordner außer Inbox)
-- NIEMALS bestehende Vault-Notes lesen, ändern oder löschen
-- NIEMALS den Nutzer mit Constraint-Verletzungen aufhalten — immer still korrigieren
-- NIEMALS `inbox: false` setzen
-- NIEMALS Konfiguration (`VAULT_INBOX_PATH` o.ä.) in die `SKILL.md` schreiben — ausschließlich in `.skill-config.json`
+7. **Confirm** with: `✅ Gespeichert: [filename]`
 
 ## Output Format
 
-Vollständiges Beispiel: → [`examples/example-01-insight.md`](examples/example-01-insight.md)
+**Input:** User says "Speicher das: Wir haben entschieden, den Runbook-Auditor wöchentlich laufen zu lassen."
+
+**Output (file written to VAULT_INBOX):**
+
+```markdown
+---
+title: "Entscheidung Runbook-Auditor Frequenz"
+type: decision
+source: antigravity
+tags: [runbooks, prozesse, qualitaet]
+date: 2026-06-04
+inbox: true
+---
+
+# Entscheidung Runbook-Auditor Frequenz
+
+Wir haben entschieden, den Runbook-Auditor wöchentlich laufen zu lassen.
+
+## Kontext
+Ergibt sich aus der Runbook-Qualitätssicherung (Chat 46c65217).
+
+---
+*antigravity | 2026-06-04 | obsidian-inbox-writer*
+```
+
+**Platform fallback (no filesystem access):**
+Output the complete note as a Markdown code block and instruct:
+```
+💾 Save as: YYYY-MM-DD — [Title].md
+📁 Place in: VAULT_INBOX
+```
