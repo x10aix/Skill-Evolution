@@ -68,3 +68,8 @@ Die Muster GmbH ist ein klassischer Hidden Champion im Maschinenbau, der aktuell
   2. "In Ihrer Smart Factory Initiative – wo sehen Sie den größten Engpass: Bei der Datenverfügbarkeit oder bei der Prozess-Integration?"
   3. "Wie stellen Sie sicher, dass Ihre KI-Projekte nicht zu reinen IT-Projekten werden, sondern messbaren ROI für die Produktion liefern?"
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

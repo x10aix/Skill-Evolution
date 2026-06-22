@@ -7,7 +7,7 @@
 The `agent-publish-workflow` originated as a local Bash-script workaround conceptualized during the development of the *Skill-Engineer* meta-skill. 
 While building advanced AI Agent patterns, we pinpointed two significant operational hazards when publishing open-source Agent Repositories (which heavily rely on `references/`, `scripts/`, or `<configuration>` environments):
 
-1. **Stateful Pollution:** Agent skills meticulously cache the context of the previous user (e.g., `STATUS: CONFIGURED`, `Target Platform: Claude Code`). Committing these files intact forces the end-user to inherit a polluted state, thereby bypassing the agent's necessary setup interview.
+1. **Stateful Pollution:** Agent skills meticulously cache the context of the previous user (e.g., `STATUS: UNCONFIGURED`, `Target Platform: Claude Code`). Committing these files intact forces the end-user to inherit a polluted state, thereby bypassing the agent's necessary setup interview.
 2. **Data Leaks (DLP-Risk):** Because AI agents act upon real local data to assemble RAG references or execute tests, there is a severe risk of hardcoding functional API keys, genuine customer data, internal company IPs (`intern.x10aix.tech`), or server passwords into the `examples/` folders and pushing them blindly to GitHub.
 
 Our initial prototype was a destructive file-wiper followed by an automated `git push`. However, we recognized that this methodology fractured the highly iterative, frictionless mindset of modern "Vibe-Coding". We concluded: **This must evolve into an independent, platform-agnostic Open-Source Agent Workflow.**

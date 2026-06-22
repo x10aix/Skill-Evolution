@@ -1,6 +1,13 @@
 ---
 name: marketing-campaign-planning
-description: Planung und Durchführung effektiver Kampagnen mit Fokus auf DACH-Mittelstand-Entscheider
+description: >
+  Plant strukturierte Marketingkampagnen für x10aix.tech mit Fokus auf Entscheider im DACH-Mittelstand.
+  Verwende diesen Skill wenn der Nutzer eine neue Kampagne entwerfen, Kanal-Strategien festlegen,
+  Content-Kalender aufbauen, Zielgruppen-Messaging entwickeln oder KPIs für Kampagnen definieren möchte.
+  Trigger-Keywords: "Kampagne planen", "Kampagnenstruktur", "Marketing-Strategie", "Content-Kalender",
+  "Sounding Board Gespräche generieren", "Zielgruppe ansprechen", "Kanalstrategie".
+  Do NOT use when der Nutzer lediglich einen einzelnen Post redigieren will (→ marketing-brand-voice
+  oder marketing-content-creation), oder wenn klassische B2C-/Massenmarkt-Funnels gefragt sind.
 ---
 
 # SKILL: Campaign Planning (Kampagnenplanung)
@@ -82,3 +89,8 @@ Awareness und Consideration bei überlasteten IT-Leads (CDO/CTO) aufbauen. Ziel:
 - *Tag 1-3:* Content-Drafts erstellen.
 - *Tag 4:* Freigabe und Scheduling.
 - *Tag 14:* Zwischenauswertung LinkedIn-Metrics.
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

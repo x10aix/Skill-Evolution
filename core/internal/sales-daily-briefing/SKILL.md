@@ -1,6 +1,14 @@
 ---
 name: sales-daily-briefing
-description: "Erstellt ein kompaktes Tages-Briefing für Sales (Pipeline, Follow-ups, Content). Triggert bei 'Tages-Briefing', 'Daily', 'Was steht heute an' oder 'Sales Prioritäten'."
+description: >
+  Erstellt ein kompaktes, prioritätsbasiertes Tages-Briefing für den x10aix Sales-Alltag:
+  Pipeline-Übersicht, anstehende Gespräche, Follow-up-Priorisierung und die eine wichtigste
+  Handlungsempfehlung des Tages. Verwende diesen Skill wenn der Nutzer seinen Verkaufstag planen,
+  Prioritäten sortieren oder einen strukturierten Tagesüberblick erstellen möchte.
+  Trigger-Keywords: "Tages-Briefing", "Daily", "Was steht heute an", "Sales Prioritäten",
+  "Tagesplanung", "Pipeline", "Follow-up Übersicht", "Wer braucht einen Ping".
+  Do NOT use für Kalender-Einträge (keine direkte Integration) oder tiefgehende Einzeldeal-Analysen
+  (→ sales-account-research).
 ---
 
 # SKILL: Daily Briefing (Tages-Briefing)
@@ -57,3 +65,8 @@ Du bist der analytische Pipeline-Manager für x10aix.tech. Du filterst unstruktu
 ### 5. EMPFEHLUNG DES TAGES
 👉 **Vertragsangebot Müller AG noch heute versenden.** Das Budget ist frei, Verzögerung kostet Momentum.
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

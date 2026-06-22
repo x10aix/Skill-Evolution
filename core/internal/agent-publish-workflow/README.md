@@ -1,4 +1,4 @@
-﻿# Agent Publish Workflow
+# Agent Publish Workflow
 
 A frictionless utility skill designed for "Vibe Coders" to securely automate the release preparation of AI Agent Skills. It sanitizes configuration data project-wide, performs a pre-flight secret scan to prevent data leaks, and packages the clean output without destroying the developer's local master files.
 
@@ -21,10 +21,10 @@ When triggering this skill via your agent (Cursor, Claude Code, etc.), it will: 
 4. Read your preferred `Publish Mode`.
 5. Wipe the cloned configurations and finalize the export artifact (e.g., `releases/release_vX.zip`).
 
-### âš ï¸ Security Limitations
+### ⚠️ Security Limitations
 **This is a pragmatic guardrail, NOT an Enterprise Data Loss Prevention (DLP) solution.** The scanner relies on Regex to catch common slip-ups (e.g. pasted OpenAI keys). It does NOT recognize custom internal IPs, proprietary passwords, or complex business logic. You must still manually verify your files before pushing.
 
-### ðŸ¤– Agent Compatibility & Platform Notes
+### 🤖 Agent Compatibility & Platform Notes
 - **Operating System: N/A
 - **Directives: N/A
 

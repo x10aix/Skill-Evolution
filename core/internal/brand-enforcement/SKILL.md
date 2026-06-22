@@ -45,3 +45,8 @@ Hier ist der korrigierte Text, der unseren Brand Guidelines entspricht:
 |----------|----------|-------------------------|
 | "Sie können sich jetzt registrieren" | "Melde dich jetzt an" | Ansprache muss zwingend "Du" sein. |
 | "unsere innovativen Produkte" | "unsere datengetriebenen Lösungen" | "innovativ" ist ein verbotenes Floskel-Wort. |
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

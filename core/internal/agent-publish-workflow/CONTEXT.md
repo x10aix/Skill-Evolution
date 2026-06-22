@@ -3,7 +3,7 @@
 ## 📌 Origin Story
 Die Idee für dieses Tool entstand direkt aus der Praxis beim Bau des **Skill-Engineers**. Während der Entwicklung fiel uns auf, dass Agent-Repositories (die naturgemäß oft `references/`, `scripts/` oder `<configuration>` Blöcke enthalten) zwei massive operationale Risiken beim Open-Source-Publishing oder bei Team-Übergaben bergen:
 
-1. **Stateful Pollution:** Agenten-Skills merken sich oft den Kontext des letzten Nutzers (z.B. `STATUS: CONFIGURED`, `Target Platform: Claude Code`). Wenn der Entwickler das pusht, erhält der nächste Nutzer einen vorkonfigurierten Zustand und das Setup-Interview des Agenten wird übersprungen.
+1. **Stateful Pollution:** Agenten-Skills merken sich oft den Kontext des letzten Nutzers (z.B. `STATUS: UNCONFIGURED`, `Target Platform: Claude Code`). Wenn der Entwickler das pusht, erhält der nächste Nutzer einen vorkonfigurierten Zustand und das Setup-Interview des Agenten wird übersprungen.
 2. **Data Leaks (DLP-Risiko):** Da Agenten lokal mit echten Daten arbeiten, um Tests oder RAG-Referenzen zu generieren, besteht die ständige Gefahr, dass aus Versehen echte API-Keys, Kundennamen, interne Server-IPs (`intern.x10aix.tech`) oder Passwörter in den `references/`- oder `examples/`-Ordnern landen und an GitHub gepusht werden.
 
 Um das zu lösen, haben wir quick-and-dirty ein lokales Antigravity-Skript (`.agents/workflows/publish.md`) geschrieben. Dieses Skript:

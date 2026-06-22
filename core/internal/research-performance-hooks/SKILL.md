@@ -1,6 +1,14 @@
 ---
 name: research-performance-hooks
-description: "Analyze top-performing B2B AI content to extract structural engagement elements. Triggers on requests to analyze LinkedIn posts, hooks, or high-engagement content."
+description: >
+  Dekonstruiert top-performenden B2B AI-Content (LinkedIn-Posts, Artikel) um psychologische
+  Engagement-Mechanismen zu extrahieren und adaptierbare Hook-Strukturen für x10aix.tech zu entwickeln.
+  Verwende diesen Skill wenn der Nutzer einen bestehenden erfolgreichen Post analysieren, Hook-Mechanismen
+  verstehen oder DACH-Executive-taugliche Content-Strukturen entwickeln möchte.
+  Trigger-Keywords: "warum lief dieser Post", "Hook analysieren", "Content dekonstruieren",
+  "Engagement-Mechanismus", "viraler Post", "Hook-Vorlage", "was macht den Post gut".
+  Do NOT use wenn der Nutzer einen komplett neuen Post von Grund auf schreiben will ohne Referenz-Post
+  (→ marketing-content-creation).
 ---
 
 # Research Performance Hooks
@@ -52,3 +60,8 @@ Der Post nutzt die Diskrepanz zwischen dem aktuellen KI-Hype und der harten Real
 ### ✍️ x10aix Adaptation
 - **Draft Hook:** "Alle reden über 'AI Transformation'. Aber 90% der Mittelständler brauchen keine Transformation – sie brauchen 3 automatisierte Prozesse, die sofort ROI liefern."
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

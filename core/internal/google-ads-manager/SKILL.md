@@ -129,3 +129,8 @@ Vor der finalen Ausgabe eines jeden Workflows, prüfe intern:
 **Ad Extensions:** Siehe [Ad Extensions](references/ad-extensions.md).
 
 **Compliance:** ✅ Alle Punkte der [Compliance-Checklist](references/compliance-checklist.md) geprüft.
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

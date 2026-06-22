@@ -24,7 +24,7 @@ The Skill-Engineer is a **Stateful Agent**. It maintains a `<configuration>` blo
 
 * **On Initial Launch (`STATUS: UNCONFIGURED`):** 
   The agent blocks all other workflows. It detects its current runtime environment (e.g., Platform = Antigravity, LLM = Gemini, Language = English) and proposes these as system defaults. Once the user confirms, the agent uses its file-system permissions to physically rewrite the block in its own `SKILL.md` to `CONFIGURED`.
-* **In Normal Operation (`STATUS: CONFIGURED`):**
+* **In Normal Operation (`STATUS: UNCONFIGURED`):**
   The agent stops prompting the user for parameters (Target LLM, Platform, etc.) and silently enforces its hardcoded defaults as law. This saves tokens and dramatically reduces user friction.
 * **Command `/config`:**
   The user can type `/config` at any time to explicitly overwrite the stored defaults in the file system.

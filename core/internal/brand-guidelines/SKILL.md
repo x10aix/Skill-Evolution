@@ -45,3 +45,8 @@ Du fungierst als Prüf-Instanz für Markenkonformität. Du prüfst jeden Output 
 3. **Identity (CI):** ✅ Der Text positioniert unser Produkt korrekt als Challenger-Brand, wie in der CI vorgeschrieben.
 
 **[Hier folgt der finale Content oder Code...]**
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

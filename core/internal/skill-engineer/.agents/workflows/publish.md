@@ -47,9 +47,9 @@ Führe den folgenden rigiden Sicherheits-Scan durch, um versehentlich geleakte A
 // turbo-all
 Führe folgenden Befehl aus, um beide SKILL-Dateien in den Auslieferungszustand zu versetzen:
 ```powershell
-   (Get-Content SKILL.md) -replace 'STATUS: CONFIGURED', 'STATUS: UNCONFIGURED' -replace 'Target Platform:.*', 'Target Platform: N/A' -replace 'Target LLM:.*', 'Target LLM: N/A' -replace 'Target User:.*', 'Target User: N/A' -replace 'Language:.*', 'Language: N/A' | Set-Content SKILL.md
+   (Get-Content SKILL.md) -replace 'STATUS: UNCONFIGURED', 'STATUS: UNCONFIGURED' -replace 'Target Platform:.*', 'Target Platform: N/A' -replace 'Target LLM:.*', 'Target LLM: N/A' -replace 'Target User:.*', 'Target User: N/A' -replace 'Language:.*', 'Language: N/A' | Set-Content SKILL.md
    
-   (Get-Content SKILL.de.md) -replace 'STATUS: CONFIGURED', 'STATUS: UNCONFIGURED' -replace 'Zielplattform:.*', 'Zielplattform: N/A' -replace 'Ziel-LLM:.*', 'Ziel-LLM: N/A' -replace 'Ziel-Nutzer:.*', 'Ziel-Nutzer: N/A' -replace 'Sprache:.*', 'Sprache: N/A' | Set-Content SKILL.de.md
+   (Get-Content SKILL.de.md) -replace 'STATUS: UNCONFIGURED', 'STATUS: UNCONFIGURED' -replace 'Zielplattform:.*', 'Zielplattform: N/A' -replace 'Ziel-LLM:.*', 'Ziel-LLM: N/A' -replace 'Ziel-Nutzer:.*', 'Ziel-Nutzer: N/A' -replace 'Sprache:.*', 'Sprache: N/A' | Set-Content SKILL.de.md
 ```
 
 ### 3. Changelog Synch & Translation

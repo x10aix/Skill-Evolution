@@ -68,3 +68,8 @@ Lead kam über unseren Post zum Thema "Dokumenten-Automatisierung". Bisher keine
 - **Einwand 2:** "Unsere interne IT baut da gerade selbst ein Python-Skript."
   - *Konter:* "Prima, dass das Know-how im Haus ist. Wie stellen Sie sicher, dass dieses Skript nahtlos in die Business-Prozesse integriert wird und nicht zu einem Wartungs-Albtraum für die IT wird?"
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

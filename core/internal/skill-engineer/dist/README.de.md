@@ -24,7 +24,7 @@ Der Skill-Engineer ist ein **Stateful Agent**. Er besitzt einen `<configuration>
 
 * **Bei Erststart (`STATUS: UNCONFIGURED`):** 
   Der Agent blockiert alle anderen Workflows. Er liest seine aktuelle Laufzeit aus (z.B. Plattform = Antigravity, LLM = Gemini, Sprache = Deutsch) und schlägt diese als System-Defaults vor. Bestätigt der Nutzer, nutzt der Agent seine Dateisystem-Rechte, um den Block in seiner eigenen `SKILL.md` physisch auf `CONFIGURED` umzuschreiben.
-* **Im Normalbetrieb (`STATUS: CONFIGURED`):**
+* **Im Normalbetrieb (`STATUS: UNCONFIGURED`):**
   Der Agent fragt den Nutzer nicht mehr nach Parametern (Ziel-LLM, Plattform etc.), sondern wendet seine fest verdrahteten Defaults stillschweigend als Gesetz an. Das spart Tokens und reduziert die Nutzer-Friktion dramatisch.
 * **Befehl `/config`:**
   Der Nutzer kann jederzeit `/config` tippen, um die gespeicherten Defaults im Dateisystem überschreiben zu lassen.

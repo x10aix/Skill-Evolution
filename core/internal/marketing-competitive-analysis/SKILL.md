@@ -1,6 +1,13 @@
 ---
 name: marketing-competitive-analysis
-description: Identifikation und Analyse der relevanten KI-Marktteilnehmer im DACH-Mittelstand.
+description: >
+  Identifiziert, analysiert und dekonstruiert relevante KI-Marktteilnehmer im DACH-Mittelstand
+  aus Marketing-Perspektive. Verwende diesen Skill bei: Wettbewerber-Analyse, Battlecard-Erstellung,
+  Content-Gap-Analyse, Positionierungsschärfung, Messaging-Vergleich.
+  Trigger-Keywords: "Wettbewerber analysieren", "Battlecard", "Konkurrenz", "Marktposition",
+  "Differenzierung", "Content-Gap", "Positionierung schärfen".
+  Do NOT use für technische KI-Modell-Vergleiche oder allgemeine Marktforschung ohne konkreten
+  Mitbewerberbezug (→ research-competitor-ads für Ad-spezifische Analysen).
 ---
 
 # SKILL: Competitive Analysis (Marketing-Wettbewerbsanalyse)
@@ -77,3 +84,8 @@ Wettbewerber "Alpha AI" fällt in die Kategorie: *Spezialisierte AI-Agentur*.
 
 **5. Differenzierungsempfehlung für x10aix.tech:**
 Im Pitch gegen Alpha AI sollte x10aix.tech den "Time-to-Value" betonen. Zeigen, dass wir keine monatelangen Architekturphasen machen, sondern in 6 Wochen Prozesse verschlanken. Der Tech-Jargon von Alpha AI kann als "akademische Spielerei" ge-framed werden.
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

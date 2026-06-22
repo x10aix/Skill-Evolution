@@ -1,6 +1,14 @@
 ---
 name: sales-create-asset
-description: "Erstellt individuelle Sales-Assets im Retro-DOS Marken-Design (Executive One-Pager, Landing Pages, Pitch-Decks) unter strikter CI-Einhaltung. Triggert bei 'Asset erstellen', 'Präsentation bauen' oder 'One-Pager'."
+description: >
+  Erstellt individuelle Sales-Assets im Retro-DOS Marken-Design für x10aix.tech:
+  Executive One-Pager, Landing-Page-Strukturen, Pitch-Decks, Demo-Skripte — unter strikter CI-Einhaltung.
+  Verwende diesen Skill wenn der Nutzer ein konkretes Vertriebs-Asset erstellen, strukturieren oder
+  designen möchte.
+  Trigger-Keywords: "Asset erstellen", "One-Pager", "Präsentation bauen", "Landing Page entwerfen",
+  "Pitch-Deck", "Demo-Skript", "Sales-Material", "Verkaufsunterlage", "Executive Briefing".
+  Do NOT use für generische Blog-Artikel ohne Vertriebsbezug, reines Copywriting ohne Asset-Struktur
+  (→ marketing-content-creation), oder Code ohne Design-Kontext.
 ---
 
 # SKILL: Create an Asset (Vertriebsasset erstellen)
@@ -55,3 +63,8 @@ Du bist der technische Asset-Konstrukteur für x10aix.tech. Du übersetzt Verkau
 
 *Design-Note: Panels mit industriellem Grau (#3A3A3C), 2px Rahmen, keine Kantenglättung.*
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

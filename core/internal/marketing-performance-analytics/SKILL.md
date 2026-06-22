@@ -1,6 +1,14 @@
 ---
 name: marketing-performance-analytics
-description: Evaluierung der Content-Performance und KPI-Tracking, fokussiert auf LinkedIn.
+description: >
+  Analysiert Marketing-KPIs und LinkedIn-Performance für x10aix.tech: Engagement-Raten, Impressionen,
+  Zero-Engagement-Trigger, Format-Mix-Bewertung und Handlungsempfehlungen. Verwende diesen Skill für:
+  Performance-Daten auswerten, Kennzahlen interpretieren, Ursachen schwacher Posts identifizieren,
+  Content-Plan retrospektiv bewerten.
+  Trigger-Keywords: "Performance analysieren", "Engagement-Rate", "Impressionen", "KPI", "LinkedIn Analytics",
+  "warum lief der Post schlecht", "Zero-Engagement", "Handlungsempfehlung Marketing".
+  Do NOT use wenn der Nutzer nur einen Text auf Brand Voice prüfen will (→ marketing-brand-voice),
+  oder für Website-Code-Analyse (→ reine Code-Skills).
 ---
 
 # SKILL: Performance Analytics (Marketing-Performance-Analyse)
@@ -74,3 +82,8 @@ Aktuell vertretbar, Reichweite ist gut auf verschiedene starke Hooks verteilt.
 **5. Handlungsempfehlung:**
 - **Streichen:** Ab sofort keine reinen Reposts mehr verwenden.
 - **Ausbauen:** Fokus auf Risiko- und Zahl-Hooks verstärken, um die Zero-Engagement-Rate unter 10% zu drücken.
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

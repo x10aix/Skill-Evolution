@@ -1,6 +1,13 @@
 ---
 name: marketing-content-creation
-description: Daten- und leistungsorientierte Vorgaben für das Erstellen von Marketing-Inhalten (LinkedIn Fokus).
+description: >
+  Erstellt data-driven Marketing-Content für x10aix.tech: LinkedIn-Posts, Blogartikel, Newsletter
+  — optimiert für Engagement und DACH-Entscheider-Zielgruppen. Verwende diesen Skill für:
+  LinkedIn-Post schreiben, Hook-Optimierung, Tier-Einordnung, Content-Entwurf, Social-Media-Tauglichkeit.
+  Trigger-Keywords: "LinkedIn Post", "Artikel schreiben", "Newsletter entwerfen", "Hook erstellen",
+  "Content für x10aix", "Post optimieren", "Engagement verbessern".
+  Do NOT use für reine Rechtschreibkorrektur oder Brand-Voice-Checks (→ marketing-brand-voice),
+  technische Whitepapers ohne Hook-Strategie, oder generischen Content ohne x10aix-Bezug.
 ---
 
 # SKILL: Content Creation (Content erstellen)
@@ -79,3 +86,8 @@ Drei pragmatische Schritte, um das Ruder herumzureißen:
 3. Erfolge intern messbar machen, bevor die nächste Lizenz gekauft wird.
 
 Wo seht ihr in euren Teams die größte Hürde beim produktiven Einsatz von AI?
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

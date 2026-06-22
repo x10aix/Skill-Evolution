@@ -1,6 +1,14 @@
 ---
 name: x10aix-design-system
-description: "Erstellt UI/UX-Konzepte, HTML-Prototypen und Assets im x10aix.tech Retro-DOS Design System. Triggert bei 'Landingpage erstellen', 'Design entwerfen', 'Style anwenden' oder 'x10aix Design'."
+description: >
+  Erstellt UI/UX-Konzepte, HTML-Prototypen und Assets im x10aix.tech Retro-DOS Design System
+  (Bernstein, Cyan, Industrial-Grau, DOS-Fonts, boxy Komponenten). Verwende diesen Skill wenn
+  Landingpages, UI-Panels, HTML-Mockups, Präsentationen oder CSS im x10aix-Corporate-Look erstellt
+  werden sollen.
+  Trigger-Keywords: "Landingpage erstellen", "Design entwerfen", "Style anwenden", "x10aix Design",
+  "Retro-DOS", "HTML Prototyp", "UI-Komponente", "CSS-Token", "Corporate Design umsetzen".
+  Do NOT use wenn der Nutzer allgemeine Programmierfragen ohne Design-Bezug stellt,
+  oder eine komplett markenunabhängige Benutzeroberfläche entwickeln will.
 ---
 
 # x10aix.tech Design System
@@ -81,3 +89,8 @@ Du bist der Frontend-Architekt für das x10aix.tech System. Deine Aufgabe ist di
   <span>SYSTEM READY // KERN-INITIATIVE GESTARTET</span>
 </div>
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

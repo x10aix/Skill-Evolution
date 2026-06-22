@@ -45,3 +45,8 @@ Ich kann das Dokument nicht direkt bearbeiten. Bitte führe folgende Formatierun
 | H2 (Unterüberschrift) | Calibri, 18pt | **Inter**, 20pt, `#0044CC` |
 | Fließtext | Times New Roman | **Roboto**, 11pt, `#333333` |
 | Tabellen-Header | Grau | Hintergrund: `#F4F4F4`, Text: `#1A1A1A` (Bold) |
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

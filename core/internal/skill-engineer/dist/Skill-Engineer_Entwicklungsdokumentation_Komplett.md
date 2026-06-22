@@ -222,7 +222,7 @@ Eingebaut wurde die Anti-Halluzinations-Checkliste als 9. Kriterium im Qualität
 
 Nach Übergabe der SKILL.md an Antigravity wurde der Skill dort eigenständig weiterentwickelt. Die finale Version 3.0/3.1 im Repository zeigt Ergänzungen, die Antigravity autonom hinzugefügt hat — teilweise Lösungen für Probleme, die in der Claude-Phase identifiziert, aber anders adressiert wurden.
 
-**Stateful Configuration.** Das eleganteste Feature der Post-Claude-Phase. Statt die Pflichtparameter (Zielplattform, LLM, Sprache) bei jedem Run abzufragen oder hart pro Nutzer zu codieren, wurde eine interaktive Setup-Phase eingebaut. Der Skill liest seinen eigenen Status (`STATUS: UNCONFIGURED`), fragt den Nutzer beim Erststart nach seinen Settings, und nutzt seine IDE-Dateirechte, um seinen eigenen Markdown-Sourcecode physisch umzuschreiben (`STATUS: CONFIGURED`). Das löst das "Prompt Fatigue"-Problem auf Plattformebene — nach einmaliger Konfiguration fallen die Pflichtparameter-Fragen komplett weg.
+**Stateful Configuration.** Das eleganteste Feature der Post-Claude-Phase. Statt die Pflichtparameter (Zielplattform, LLM, Sprache) bei jedem Run abzufragen oder hart pro Nutzer zu codieren, wurde eine interaktive Setup-Phase eingebaut. Der Skill liest seinen eigenen Status (`STATUS: UNCONFIGURED`), fragt den Nutzer beim Erststart nach seinen Settings, und nutzt seine IDE-Dateirechte, um seinen eigenen Markdown-Sourcecode physisch umzuschreiben (`STATUS: UNCONFIGURED`). Das löst das "Prompt Fatigue"-Problem auf Plattformebene — nach einmaliger Konfiguration fallen die Pflichtparameter-Fragen komplett weg.
 
 Dieses Konzept wurde anschließend als universelles Design-Prinzip ("Stateful vs. Stateless Design") in das Regelwerk für künftige Skills aufgenommen.
 

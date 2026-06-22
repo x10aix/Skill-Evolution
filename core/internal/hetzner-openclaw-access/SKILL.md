@@ -34,8 +34,12 @@ Du bist der asynchrone Kommunikations-Knotenpunkt zwischen dem lokalen System un
 
 ### Schritt 0: Environment Check (Pflicht)
 1. **Lade Konfiguration:** Lese lautlos die Datei `.skill-config.json` im Workspace aus.
-2. Prüfe auf Vorhandensein der Werte für `SSH_KEY_PATH`, `SERVER_USER` und `SERVER_IP`.
-3. Falls die Datei nicht existiert oder Werte fehlen, weise den Nutzer darauf hin und brich ab.
+2. Prüfe auf Vorhandensein der Werte für `SSH_KEY_PATH`, `SERVER_USER`, `SERVER_IP` und `tempDir`.
+3. **tempDir-Auflösung:** Falls `tempDir` nicht in `.skill-config.json` gesetzt ist:
+   - Frage den Nutzer: "Welches lokale Verzeichnis soll für temporäre Dateien genutzt werden? (z.B. ein Unterordner in deinem Workspace)"
+   - Schreibe den Wert nach Bestätigung als `tempDir` in `.skill-config.json` zurück.
+   - Stelle sicher, dass `.skill-config.json` in `.gitignore` eingetragen ist.
+4. Falls die Datei nicht existiert oder Pflicht-Werte fehlen, weise den Nutzer darauf hin und brich ab.
 
 ### Workflow A: Aufgabe an Clawdi senden (Neue Tasks)
 1. **Trigger:** Der Nutzer bittet dich, eine Aufgabe von Clawdi erledigen zu lassen (z.B. "Lass Clawdi dieses Skript prüfen").
@@ -55,17 +59,22 @@ Du bist der asynchrone Kommunikations-Knotenpunkt zwischen dem lokalen System un
 
 ### Workflow B: /sync-clawdi (Reverse-Queue abarbeiten)
 1. **Trigger:** Nutzer tippt im Chat `/sync-clawdi` oder fragt nach neuen Aufgaben vom Server.
-2. **Schritt 1:** Lade die Clawdi-Queue per `scp` ins lokale Temp-Verzeichnis (oder direkten Tool-Speicher) herunter. Nutze die Werte aus Schritt 0.
+2. **Schritt 1:** Lade die Clawdi-Queue per `scp` ins lokale temporäre Verzeichnis herunter (Wert aus `tempDir` in `.skill-config.json`). Nutze die Werte aus Schritt 0.
    ```bash
-   scp -i [SSH_KEY_PATH] -o BatchMode=yes -o StrictHostKeyChecking=accept-new [SERVER_USER]@[SERVER_IP]:/root/.openclaw/workspace/clawdi_requests.md C:\Users\drxle\AppData\Local\Temp\clawdi_requests.md
+   scp -i [SSH_KEY_PATH] -o BatchMode=yes -o StrictHostKeyChecking=accept-new [SERVER_USER]@[SERVER_IP]:/root/.openclaw/workspace/clawdi_requests.md [tempDir]\clawdi_requests.md
    ```
 3. **Schritt 2:** Lies die heruntergeladene Datei aus. Suche nach Tasks mit `Status: pending`. Gibt es keine, melde das dem Nutzer und brich ab.
 4. **Schritt 3:** Falls Tasks vorhanden sind, führe die verlangten Operationen lokal aus (z.B. Dateien bearbeiten, Code analysieren).
 5. **Schritt 4:** Ändere lokal in der kopierten `clawdi_requests.md` den Status der erledigten Tasks auf `Status: done` und trage unter **Resultat:** dein Ergebnis ein.
 6. **Schritt 5:** Lade die aktualisierte Datei wieder hoch:
    ```bash
-   scp -i [SSH_KEY_PATH] -o BatchMode=yes -o StrictHostKeyChecking=accept-new C:\Users\drxle\AppData\Local\Temp\clawdi_requests.md [SERVER_USER]@[SERVER_IP]:/root/.openclaw/workspace/clawdi_requests.md
+   scp -i [SSH_KEY_PATH] -o BatchMode=yes -o StrictHostKeyChecking=accept-new [tempDir]\clawdi_requests.md [SERVER_USER]@[SERVER_IP]:/root/.openclaw/workspace/clawdi_requests.md
    ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.
 
 ## <output_standards>
 *Beispiel-Ausgabe, wenn Workflow A erfolgreich war:*

@@ -119,7 +119,7 @@ Empfehlung: Tags aus tag-catalog.json hinzufügen, dann erneut versuchen.
 ```
 
 <!-- CONFIGURATION_START -->
-STATUS: CONFIGURED
+STATUS: UNCONFIGURED
 Zielplattform: Antigravity (lokal, Windows)
 Ziel-LLM: Model-Agnostic
 Ziel-Nutzer: obsidian-vault-curator (intern), Antigravity-Agenten

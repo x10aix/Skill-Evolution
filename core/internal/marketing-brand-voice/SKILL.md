@@ -113,3 +113,8 @@ Drei Hebel, die bei Mittelständlern sofort gewirkt haben:
 3. AI als Co-Pilot einsetzen — du bleibst Kapitän
 
 Was ist dein größter Engpass gerade?
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

@@ -59,3 +59,8 @@ Sichern Sie sich einen der letzten 15 Plätze im Onboarding-Webinar nächsten Di
 
 *Visual-Vorschlag:*
 Klares, minimalistisches Dashboard der Software. Darüber großflächig die Zahl "2.500+". Farbelemente in Vertrauen erweckendem Dunkelblau.
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

@@ -61,3 +61,8 @@ Der Wettbewerber lässt völlig offen, *wie* die Integration in bestehende Syste
 - **Konter-Hook für x10aix:** "Alle reden über AI-Strategien und den EU AI Act. Wir reden darüber, wie Sie in 6 Wochen einen messbaren ROI erzielen – integriert in Ihre bestehenden Systeme."
 - **Format-Empfehlung:** Karussell-Post mit 3 konkreten Praxis-Beispielen (Knowledge Automation), der mit dem Angebot für ein unverbindliches "AI Sounding Board" endet (Low Barrier CTA).
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

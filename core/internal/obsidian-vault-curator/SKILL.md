@@ -175,7 +175,7 @@ Grund: Inhalt passt zu 10_Projects UND 30_Resources — manuelle Einordnung empf
 ```
 
 <!-- CONFIGURATION_START -->
-STATUS: CONFIGURED
+STATUS: UNCONFIGURED
 Zielplattform: Antigravity (lokal, Windows, PowerShell-Zugriff)
 Ziel-LLM: Model-Agnostic (Claude Sonnet / Gemini / GPT-4o)
 Ziel-Nutzer: Antigravity-Agenten, Clawdi (via Task-Queue)

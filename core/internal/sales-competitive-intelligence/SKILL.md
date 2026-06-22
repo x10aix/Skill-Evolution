@@ -66,3 +66,8 @@ Die Battlecard muss exakt so aufgebaut sein:
 - **Einwand:** "McKinsey hat aber die bekanntere Marke und gibt uns Sicherheit."
   - **Konter:** "Absolut, niemand wird gefeuert, weil er McKinsey beauftragt. Aber die Frage ist: Wollen Sie Sicherheit auf dem Papier, oder wollen Sie einen Partner, der die Hands-ärmel hochkrempelt und das System in Ihrem DACH-Mittelstands-Umfeld zum Laufen bringt?"
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.

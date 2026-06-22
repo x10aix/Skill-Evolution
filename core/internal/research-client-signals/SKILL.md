@@ -64,3 +64,8 @@ Ansatzpunkt: Der neue CDO hat den Auftrag zur Digitalisierung, aber vermutlich n
 2. "Ihre aktuelle Suche nach AI Specialists deutet auf Ambitionen hin. Wie stellen Sie sicher, dass diese Ressourcen nicht im operativen IT-Kauderwelsch untergehen, sondern strategischen ROI liefern?"
 3. "Welche Rolle spielt aktuell die EU AI Act Compliance in Ihren Digitalisierungsinitiativen?"
 ```
+
+## <security>
+- NIEMALS Konfiguration (API-Keys, Vault-Pfade, OAuth-Tokens) in der SKILL.md speichern — ausschließlich in `.skill-config.json` oder `.env`.
+- `.skill-config.json` / `.env` MUSS in `.gitignore` eingetragen sein, bevor der Skill in ein Repository gepusht wird.
+- Kein State-schreibender Schritt ohne expliziten Bestätigungs-Mechanismus für destruktive Aktionen.
